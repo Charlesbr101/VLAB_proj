@@ -10,15 +10,19 @@ Para a execução do projeto é necessário todas as dependências do laravel + 
 
 Para levantar o docker, executar o comando:
 
-<code>./vendor/bin/sail up
+```console
+./vendor/bin/sail up
+```
 
 Com isso o banco de dados mySQL e as rotas já estarão funcionando.
 
 Para importar o banco de dados, um dump sql já está disponível no diretório do projeto, bastando executar o comando:
 
-<code>./vendor/bin/sail mysql < laraveldb_dump.sql
+```console
+./vendor/bin/sail mysql < laraveldb_dump.sql
+```
 
-Caso deseje visualizar o banco como um todo, inclui nas configurações do docker-compose para também levantar uma instância do phpadmin, localizado em [http://localhost:8001](http://localhost:8001), com usuário "sail" e senha "password".
+Caso deseje visualizar o banco como um todo, incluí nas configurações do docker-compose para também levantar uma instância do phpadmin, localizado em [http://localhost:8001](http://localhost:8001), com usuário "sail" e senha "password".
 
 Para o teste das funcionalidades requisitadas, também está disponível um swagger quando o ambiente é executado, localizado em [http://localhost/api/documentation](http://localhost/api/documentation) (também pode ser importado do arquivo em "/storage/api-docs/api-docs.json")
 

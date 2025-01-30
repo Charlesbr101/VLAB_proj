@@ -1,4 +1,4 @@
-[esquema.pdf](https://github.com/user-attachments/files/18596750/esquema.pdf)## Projeto VLAB em Laravel
+## Projeto VLAB em Laravel
 
 Projeto usando a framework Laravel para a criação de um banco de dados com endpoints para alimentar funcionalidades de uma aplicação.
 

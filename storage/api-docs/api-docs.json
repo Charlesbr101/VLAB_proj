@@ -1,0 +1,642 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Endpoints do projeto de seleção da VLAB",
+        "version": "1.0"
+    },
+    "paths": {
+        "/myapi/transacoes/categorias": {
+            "get": {
+                "tags": [
+                    "Categoria de Transação"
+                ],
+                "summary": "Listar categorias",
+                "description": "Lista as categorias de transações no sistema",
+                "operationId": "getCategoriasTransacao",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items":{
+                                        "$ref": "#/components/schemas/CategoriaTransacao"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categoria de Transação"
+                ],
+                "summary": "Cadastrar categoria",
+                "description": "Cadastra uma categoria de transação no sistema",
+                "operationId": "createCategoriaTransacao",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InfoCategoriaTransacao"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CategoriaTransacao"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The nome has already been taken."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "example": "The nome has already been taken."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        },
+        "/myapi/usuarios": {
+            "post": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Cadastrar usuário",
+                "description": "Cadastra um usuário no sistema",
+                "operationId": "createUsuario",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InfoUsuario"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The cpf has already been taken."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "example": "The cpf has already been taken."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/myapi/usuarios/{id_usuario}": {
+            "put": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Editar usuário",
+                "description": "Edita as informações de um usuário no sistema por seu id",
+                "operationId": "editUsuarioById",
+                "parameters": [
+                    {
+                        "name": "id_usuario",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 3
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": { 
+                                "$ref": "#/components/schemas/InfoUsuario"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The cpf has already been taken."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "example": "The cpf has already been taken."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Usuário"
+                ],
+                "summary": "Remover usuário",
+                "description": "Remove um usuário do sistema por seu id",
+                "operationId": "removeUsuarioById",
+                "parameters": [
+                    {
+                        "name": "id_usuario",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+
+        "/myapi/transacoes": {
+            "get": {
+                "tags": [
+                    "Transação"
+                ],
+                "summary": "Listar transações",
+                "description": "Lista as transações no sistema",
+                "operationId": "getTransacoes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema":{
+                                    "type": "array",
+                                    "items":{
+                                        "$ref": "#/components/schemas/Transacao"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transação"
+                ],
+                "summary": "Cadastrar transação",
+                "description": "Cadastra uma transação no sistema",
+                "operationId": "createTransacao",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InfoTransacao"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Transacao"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The selected usuario is invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "example": "The selected usuario is invalid."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/myapi/transacoes/categorias/{id_categoria}": {
+            "delete": {
+                "tags": [
+                    "Categoria de Transação"
+                ],
+                "summary": "Remover categoria",
+                "description": "Remove uma categoria de transação do sistema por seu id",
+                "operationId": "deleteCategoriaTransacao",
+                "parameters": [
+                    {
+                        "name": "id_categoria",
+                        "in": "path",
+                        "description": "ID da categoria de transação",
+                        "required": true,
+                        "schema": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+
+        "/myapi/transacoes/filtrar": {
+            "get": {
+                "tags": [
+                    "Transação"
+                ],
+                "summary": "Filtrar transações",
+                "description": "Lista as transações no sistema a depender dos seus tipos, categorias e usuários",
+                "operationId": "getTransacoesByFilters",
+                "parameters": [
+                    {
+                        "name": "usuario",
+                        "in": "query",
+                        "description": "Id do usuário presente na transação",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "categoria",
+                        "in": "query",
+                        "description": "Id da categoria de transação a qual a transação pertence (para transações sem categoria definir como \"null\")",
+                        "required": false,
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },{
+                                    "type": "string",
+                                    "nullable": true
+                                }
+                            ],
+                            "example": "null"
+                        }
+                    },
+                    {
+                        "name": "tipo",
+                        "in": "query",
+                        "description": "Tipo da transação (0 -> Receber ou 1 -> Pagar)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 0
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema":{
+                                    "type": "array",
+                                    "items":{
+                                        "$ref": "#/components/schemas/Transacao"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The categoria field must be an integer."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "example": "The categoria field must be an integer."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/myapi/transacoes/{id_transacao}": {
+            "delete": {
+                "tags": [
+                    "Transação"
+                ],
+                "summary": "Remover transação",
+                "description": "Remove uma transação do sistema por seu id",
+                "operationId": "removeTransacaoById",
+                "parameters": [
+                    {
+                        "name": "id_transacao",
+                        "in": "path",
+                        "description": "ID da transação",
+                        "required": true,
+                        "schema": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+
+    },
+    "tags": [
+        {
+            "name": "Categoria de Transação",
+            "description": "Categorias de transações do sistema"
+        },
+        {
+            "name": "Usuário",
+            "description": "Usuários do sistema"
+        },
+        {
+            "name": "Transação",
+            "description": "Transações no sistema"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "InfoUsuario": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "nome":     "Carlos Mathias",
+                    "cpf":      "70000000002",
+                    "email":    "cm@gmail.com",
+                    "senha":    "123"
+                }
+            },
+            "Usuario": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id":       1,
+                    "nome":     "Carlos Mathias",
+                    "cpf":      "70000000002",
+                    "email":    "cm@gmail.com",
+                    "senha":    "123"
+                }
+            },
+            "InfoCategoriaTransacao": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "nome": "Compras"
+                }
+            },
+            "CategoriaTransacao": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id"  : 1,
+                    "nome": "Compras"
+                }
+            },
+            "InfoTransacao": {
+                "type": "object",
+                "properties": {
+                    "usuario": {
+                        "type": "integer"
+                    },
+                    "categoria": {
+                        "type": "integer"
+                    },
+                    "tipo": {
+                        "type": "integer"
+                    },
+                    "valor": {
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "usuario"      	: 1,
+                    "categoria"		: 2,
+                    "tipo"          : 0,
+                    "valor"         : 200.47
+                }
+            },
+            "Transacao": {
+                "type": "object",
+                "properties": {
+                    "id":{
+                        "type": "integer"
+                    },
+                    "id_usuario": {
+                        "type": "integer"
+                    },
+                    "id_categoria": {
+                        "type": "integer"
+                    },
+                    "tipo": {
+                        "type": "integer"
+                    },
+                    "valor": {
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "id"                : 1,
+                    "id_usuario"      	: 1,
+                    "id_categoria"		: 2,
+                    "tipo"              : 0,
+                    "valor"             : 200.47
+                }
+            }
+        }
+    }
+}
